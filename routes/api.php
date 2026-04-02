@@ -3,11 +3,20 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\ProfileController;
+<<<<<<< HEAD
+use App\Http\Controllers\Api\WatchlistController; 
+
+/*
+|--------------------------------------------------------------------------
+| PUNYA USER
+|--------------------------------------------------------------------------
+*/
+=======
 use App\Http\Controllers\Api\FilmController;
 use App\Http\Controllers\Api\GenreController;
 use App\Http\Controllers\GenreController as ControllersGenreController;
+>>>>>>> main
 
-////PUNYA USER
 // PUBLIC
 Route::get('/users', [UserController::class, 'index']);
 Route::get('/users/{id}', [UserController::class, 'show']);
@@ -23,9 +32,25 @@ Route::get('/genres', [ControllersGenreController::class, 'getAllGenres']);
 Route::get('/genres/{id}', [ControllersGenreController::class, 'getGenreById']);
 
 
-// PROTECTED
+// PROTECTED (Custom Middleware)
 Route::middleware('user.auth')->group(function () {
     Route::post('/users', [UserController::class, 'store']);
+<<<<<<< HEAD
+});
+
+/*
+|--------------------------------------------------------------------------
+| PUNYA WATCHLIST
+|--------------------------------------------------------------------------
+*/
+
+// PROTECTED (Sanctum Middleware)
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/watchlists', [WatchlistController::class, 'index']);
+    Route::get('/watchlists/{id}', [WatchlistController::class, 'show']);
+    Route::post('/watchlists', [WatchlistController::class, 'store']);
+});
+=======
     Route::middleware('user.auth')->group(function () {
     Route::post('/users', [UserController::class, 'store']);
 
@@ -33,3 +58,4 @@ Route::middleware('user.auth')->group(function () {
     Route::post('/films', [FilmController::class, 'store']);
 });
 });
+>>>>>>> main
