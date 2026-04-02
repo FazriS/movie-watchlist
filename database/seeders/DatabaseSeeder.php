@@ -10,5 +10,7 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(UserSeeder::class);
         $this->call(FilmSeeder::class);
+        $this->call(GenreSeeder::class);
+        $this->call(WatchlistSeeder::class);
     }
 }

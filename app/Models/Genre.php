@@ -6,8 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Genre extends Model
 {
-   public function films()
-{
-    return $this->belongsToMany(Film::class, 'film_genres');
-}
+    protected $fillable = ['name'];
+
+    public function films()
+    {
+        return $this->belongsToMany(Film::class, 'film_genres');
+    }
 }

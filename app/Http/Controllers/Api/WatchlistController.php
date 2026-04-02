@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Api;
 use App\Models\Watchlist;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers;
+use App\Http\Controllers\Controller;
 
 class WatchlistController extends Controller
 {
