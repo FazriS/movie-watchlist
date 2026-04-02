@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\ProfileController;
 use App\Http\Controllers\Api\FilmController;
+use App\Http\Controllers\Api\GenreController;
+use App\Http\Controllers\GenreController as ControllersGenreController;
 
 ////PUNYA USER
 // PUBLIC
@@ -14,6 +16,12 @@ Route::get('/profiles/{id}', [ProfileController::class, 'show']);
 Route::get('/films', [FilmController::class, 'index']);
 Route::get('/films/{id}', [FilmController::class, 'show']);
 Route::get('/films/{id}/genres', [FilmController::class, 'genres']);
+
+// PUBLIC
+Route::post('/genres', [ControllersGenreController::class, 'createGenre']);
+Route::get('/genres', [ControllersGenreController::class, 'getAllGenres']);
+Route::get('/genres/{id}', [ControllersGenreController::class, 'getGenreById']);
+
 
 // PROTECTED
 Route::middleware('user.auth')->group(function () {
