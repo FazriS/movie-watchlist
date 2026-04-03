@@ -44,10 +44,10 @@ Route::middleware('user.auth')->group(function () {
 
 /*
 |--------------------------------------------------------------------------
-| WATCHLIST (Sanctum)
+| WATCHLIST (Custom Middleware)
 |--------------------------------------------------------------------------
 */
-Route::middleware('auth:sanctum')->group(function () {
+Route::middleware('user.auth')->group(function () {
     Route::get('/watchlists', [WatchlistController::class, 'index']);
     Route::get('/watchlists/{id}', [WatchlistController::class, 'show']);
     Route::post('/watchlists', [WatchlistController::class, 'store']);
