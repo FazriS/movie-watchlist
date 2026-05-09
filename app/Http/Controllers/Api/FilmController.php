@@ -21,12 +21,31 @@ class FilmController extends Controller
     public function store(Request $request)
     {
         $film = Film::create($request->all());
+
         return response()->json($film, 201);
     }
 
     public function genres($id)
     {
         $film = Film::with('genres')->findOrFail($id);
+
         return response()->json($film->genres);
+    }
+
+    public function destroy($id)
+    {
+        $film = Film::find($id);
+
+        if (!$film) {
+            return response()->json([
+                'message' => 'Film tidak ditemukan'
+            ], 404);
+        }
+
+        $film->delete();
+
+        return response()->json([
+            'message' => 'Film berhasil dihapus'
+        ], 200);
     }
 }

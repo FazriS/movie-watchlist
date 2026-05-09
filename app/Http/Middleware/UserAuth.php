@@ -24,7 +24,7 @@ class UserAuth
             ], 401);
         }
 
-        // 🔥 SET USER LOGIN SECARA MANUAL
+        // SET USER LOGIN SECARA MANUAL
         Auth::loginUsingId($users[$apiKey]);
 
         return $next($request);
