@@ -49,7 +49,7 @@ const Dashboard = () => {
                         <Tag size={22} />
                         {sidebarOpen && <span>Genre</span>}
                     </Link>
-                    <Link to="#" style={styles.sidebarItem}>
+                    <Link to="/watchlist" style={styles.sidebarItem}>
                         <Heart size={22} />
                         {sidebarOpen && <span>Watchlist</span>}
                     </Link>

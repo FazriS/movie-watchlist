@@ -57,4 +57,5 @@ Route::middleware('auth:api')->group(function () {
     Route::get('/watchlists', [WatchlistController::class, 'index']);
     Route::get('/watchlists/{id}', [WatchlistController::class, 'show']);
     Route::post('/watchlists', [WatchlistController::class, 'store']);
+    Route::put('/watchlists/{id}', [WatchlistController::class, 'update']); // <-- Jalur API untuk Ubah Status
 });
