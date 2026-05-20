@@ -10,9 +10,10 @@ import ProtectedRoute from './components/ProtectedRoute';
 // Import Seluruh Halaman Aplikasi (Pages)
 import Login from './pages/Login';
 import Register from './pages/Register';
-import Dashboard from './pages/Dashboard'; // SEKARANG DI-IMPORT DARI PAGES
+import Dashboard from './pages/Dashboard';
 import MyProfile from './pages/MyProfile';
 import UserList from './pages/UserList';
+import GenreList from './pages/GenreList';
 
 function App() {
     return (
@@ -39,6 +40,13 @@ function App() {
                     <Route path="/users" element={
                         <ProtectedRoute>
                             <UserList />
+                        </ProtectedRoute>
+                    } />
+
+                    {/* Genre: semua role bisa akses halaman, tapi fitur tambah/attach hanya admin & manager */}
+                    <Route path="/genres" element={
+                        <ProtectedRoute>
+                            <GenreList />
                         </ProtectedRoute>
                     } />
 

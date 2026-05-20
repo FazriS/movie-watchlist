@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Menu, User, Film, Heart, LogOut, UserPlus } from 'lucide-react';
+import { Menu, User, Film, Heart, LogOut, UserPlus, Tag } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 
 // ================= DUMMY DATA =================
@@ -36,6 +36,10 @@ const Dashboard = () => {
                     <Link to="#" style={styles.sidebarItem}>
                         <Film size={22} />
                         {sidebarOpen && <span>List Film</span>}
+                    </Link>
+                    <Link to="/genres" style={styles.sidebarItem}>
+                        <Tag size={22} />
+                        {sidebarOpen && <span>Genre</span>}
                     </Link>
                     <Link to="#" style={styles.sidebarItem}>
                         <Heart size={22} />
