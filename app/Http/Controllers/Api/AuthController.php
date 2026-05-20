@@ -24,14 +24,20 @@ class AuthController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->json($validator->errors(), 422);
+            return response()->json(
+                $validator->errors(),
+                422
+            );
         }
 
         $user = User::create([
             'name'     => $request->name,
             'email'    => $request->email,
-            // Jangan gunakan Hash::make() jika di Model User sudah ada cast 'hashed'
-            'password' => $request->password, 
+
+            // Jangan gunakan Hash::make()
+            // jika di Model User sudah ada cast 'hashed'
+            'password' => $request->password,
+
             'role'     => $request->role,
         ]);
 
@@ -58,14 +64,20 @@ class AuthController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->json($validator->errors(), 422);
+            return response()->json(
+                $validator->errors(),
+                422
+            );
         }
 
-        $credentials = $request->only('email', 'password');
+        $credentials = $request->only(
+            'email',
+            'password'
+        );
 
         if (!$token = auth('api')->attempt($credentials)) {
             return response()->json([
-                'error' => 'Unauthorized: Email atau password salah'
+                'error' => 'Unauthorized: Email atau password salah',
             ], 401);
         }
 
@@ -80,7 +92,7 @@ class AuthController extends Controller
         auth('api')->logout();
 
         return response()->json([
-            'message' => 'User successfully signed out'
+            'message' => 'User successfully signed out',
         ]);
     }
 
@@ -89,7 +101,12 @@ class AuthController extends Controller
      */
     public function getUserProfile()
     {
-        return response()->json(auth('api')->user());
+        // Mengambil user yang sedang login
+        // beserta relasi profilnya
+        $user = User::with('profile')
+            ->find(auth('api')->id());
+
+        return response()->json($user);
     }
 
     /**
@@ -99,9 +116,14 @@ class AuthController extends Controller
     {
         return response()->json([
             'access_token' => $token,
+
             'token_type'   => 'bearer',
+
             // Default TTL jwt-auth adalah 60 menit
-            'expires_in'   => auth('api')->factory()->getTTL() * 60,
+            'expires_in'   => auth('api')
+                ->factory()
+                ->getTTL() * 60,
+
             'user'         => auth('api')->user(),
         ]);
     }

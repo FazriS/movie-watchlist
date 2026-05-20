@@ -9,11 +9,12 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up()
+    public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            // Default diset ke 'user' agar pendaftaran biasa tidak langsung jadi admin
-            $table->enum('role', ['admin', 'manager', 'user'])->default('user');
+            $table->enum('role', ['admin', 'manager', 'user'])
+                  ->default('user')
+                  ->after('password');
         });
     }
 
@@ -23,7 +24,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            //
+            $table->dropColumn('role');
         });
     }
 };
