@@ -110,7 +110,7 @@ const GenreList = () => {
                     <Link to="/genres" style={{ ...s.sidebarItem, background: 'rgba(229,9,20,0.15)', color: '#E50914' }}>
                         <Tag size={22} />{sidebarOpen && <span>Genre</span>}
                     </Link>
-                    <Link to="#" style={s.sidebarItem}>
+                    <Link to="Watchlist/" style={s.sidebarItem}>
                         <Heart size={22} />{sidebarOpen && <span>Watchlist</span>}
                     </Link>
                 </div>

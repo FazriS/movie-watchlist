@@ -15,43 +15,113 @@ import MyProfile from './pages/MyProfile';
 import UserList from './pages/UserList';
 import GenreList from './pages/GenreList';
 
+import FilmList from './pages/FilmList';
+import FilmDetail from './pages/FilmDetail';
+import FilmForm from './pages/FilmForm';
+
 function App() {
     return (
         <AuthProvider>
             <Router>
                 <Routes>
+
                     {/* ================= PUBLIC ROUTES ================= */}
+
                     <Route path="/login" element={<Login />} />
+
                     <Route path="/register" element={<Register />} />
 
+
                     {/* ================= PROTECTED ROUTES ================= */}
-                    <Route path="/dashboard" element={
-                        <ProtectedRoute>
-                            <Dashboard />
-                        </ProtectedRoute>
-                    } />
 
-                    <Route path="/me" element={
-                        <ProtectedRoute>
-                            <MyProfile />
-                        </ProtectedRoute>
-                    } />
+                    <Route
+                        path="/dashboard"
+                        element={
+                            <ProtectedRoute>
+                                <Dashboard />
+                            </ProtectedRoute>
+                        }
+                    />
 
-                    <Route path="/users" element={
-                        <ProtectedRoute>
-                            <UserList />
-                        </ProtectedRoute>
-                    } />
+                    <Route
+                        path="/me"
+                        element={
+                            <ProtectedRoute>
+                                <MyProfile />
+                            </ProtectedRoute>
+                        }
+                    />
 
-                    {/* Genre: semua role bisa akses halaman, tapi fitur tambah/attach hanya admin & manager */}
-                    <Route path="/genres" element={
-                        <ProtectedRoute>
-                            <GenreList />
-                        </ProtectedRoute>
-                    } />
+                    <Route
+                        path="/users"
+                        element={
+                            <ProtectedRoute>
+                                <UserList />
+                            </ProtectedRoute>
+                        }
+                    />
+
+                    {/* Genre: semua role bisa akses halaman */}
+                    <Route
+                        path="/genres"
+                        element={
+                            <ProtectedRoute>
+                                <GenreList />
+                            </ProtectedRoute>
+                        }
+                    />
+
+
+                    {/* ================= FILM ROUTES ================= */}
+
+                    {/* Semua user yang login bisa lihat daftar film */}
+                    <Route
+                        path="/films"
+                        element={
+                            <ProtectedRoute>
+                                <FilmList />
+                            </ProtectedRoute>
+                        }
+                    />
+
+                    {/* Semua user login bisa lihat detail */}
+                    <Route
+                        path="/films/:id"
+                        element={
+                            <ProtectedRoute>
+                                <FilmDetail />
+                            </ProtectedRoute>
+                        }
+                    />
+
+                    {/* Hanya admin & manager */}
+                    <Route
+                        path="/films/create"
+                        element={
+                            <ProtectedRoute allowedRoles={['admin', 'manager']}>
+                                <FilmForm />
+                            </ProtectedRoute>
+                        }
+                    />
+
+                    {/* Hanya admin & manager */}
+                    <Route
+                        path="/films/edit/:id"
+                        element={
+                            <ProtectedRoute allowedRoles={['admin', 'manager']}>
+                                <FilmForm />
+                            </ProtectedRoute>
+                        }
+                    />
+
 
                     {/* ================= FALLBACK ================= */}
-                    <Route path="*" element={<Navigate to="/login" replace />} />
+
+                    <Route
+                        path="*"
+                        element={<Navigate to="/login" replace />}
+                    />
+
                 </Routes>
             </Router>
         </AuthProvider>
@@ -59,4 +129,5 @@ function App() {
 }
 
 const root = ReactDOM.createRoot(document.getElementById('app'));
+
 root.render(<App />);

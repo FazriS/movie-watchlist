@@ -77,4 +77,28 @@ class WatchlistController extends Controller
             'data'    => $watchlist->load('film'),
         ], 201); // 201: Created
     }
+
+    /**
+     * PUT /api/watchlists/{id}
+     * Mengubah status item watchlist tertentu (planned, watching, watched).
+     */
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'status' => 'required|in:planned,watching,watched',
+        ]);
+
+        // Proteksi Ketat: Pastikan item watchlist ini benar-benar milik user yang sedang login
+        $watchlist = Watchlist::where('user_id', Auth::id())->findOrFail($id);
+
+        $watchlist->update([
+            'status' => $request->status,
+        ]);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Status watchlist berhasil diperbarui.',
+            'data'    => $watchlist->load('film'),
+        ]);
+    }
 }
