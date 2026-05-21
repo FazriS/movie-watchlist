@@ -38,6 +38,8 @@ Route::middleware('auth:api')->group(function () {
     Route::get('/films', [FilmController::class, 'index']);
     Route::get('/films/{id}', [FilmController::class, 'show']);
     Route::get('/films/{id}/genres', [FilmController::class, 'genres']);
+    Route::put('/films/{id}', [FilmController::class, 'update']);
+    Route::delete('/films/{id}', [FilmController::class, 'destroy']);
     
     // Admin & Manager bisa tambah/update film
     Route::post('/films', [FilmController::class, 'store'])->middleware('role:admin,manager');

@@ -91,7 +91,7 @@ const FilmDetail = () => {
                 <div style={styles.info}>
                     <h1 style={styles.title}>{film.title}</h1>
 
-                    <p style={styles.year}>📅 {film.release_year}</p>
+                    <p style={styles.year}>📅 {film.release_date}</p>
 
                     {/* Genre tags */}
                     {genres.length > 0 && (

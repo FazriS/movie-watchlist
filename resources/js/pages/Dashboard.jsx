@@ -111,7 +111,7 @@ const Dashboard = () => {
                         <div style={styles.heroOverlay}>
                             <p style={styles.newBadge}>NEW RELEASE</p>
                             <h2 style={styles.heroTitle}>{heroFilm.title}</h2>
-                            <p style={styles.heroYear}>{heroFilm.release_year}</p>
+                            <p style={styles.heroYear}>{heroFilm.release_date}</p>
                             <button style={styles.watchButton}>▶ Lihat Detail</button>
                         </div>
                     </div>
@@ -167,7 +167,7 @@ const Dashboard = () => {
                                     )}
                                     <div style={styles.movieInfo}>
                                         <p style={styles.movieTitle}>{film.title}</p>
-                                        <p style={styles.movieYear}>{film.release_year}</p>
+                                        <p style={styles.movieYear}>{film.release_date}</p>
                                     </div>
                                 </div>
                             ))}
