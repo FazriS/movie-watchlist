@@ -15,7 +15,9 @@ class Film extends Model
         'description',
         'release_date',
         'duration',
-        'rating'
+        'rating',
+        'poster',
+        
     ];
 
     public function genres()

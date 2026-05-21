@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\Controller;
 use App\Models\Film;
 use Illuminate\Http\Request;
 
@@ -25,6 +26,24 @@ class FilmController extends Controller
     public function show($id)
     {
         return Film::findOrFail($id);
+    }
+
+    // PUT /api/films/{id}
+    public function update(Request $request, $id)
+    {
+        $film = Film::findOrFail($id);
+        $film->update($request->all());
+
+        return response()->json($film);
+    }
+
+    // DELETE /api/films/{id}
+    public function destroy($id)
+    {
+        $film = Film::findOrFail($id);
+        $film->delete();
+
+        return response()->json(['message' => 'Film berhasil dihapus']);
     }
 
     // GET /api/films/{id}/genres

@@ -8,6 +8,12 @@ use Illuminate\Http\Request;
 
 class FilmController extends Controller
 {
+    public function store(Request $request)
+    {
+        $film = Film::create($request->all());
+        return response()->json($film, 201);
+    }
+
     public function index()
     {
         return Film::all();
@@ -18,34 +24,23 @@ class FilmController extends Controller
         return Film::findOrFail($id);
     }
 
-    public function store(Request $request)
+    public function update(Request $request, $id)
     {
-        $film = Film::create($request->all());
+        $film = Film::findOrFail($id);
+        $film->update($request->all());
+        return response()->json($film);
+    }
 
-        return response()->json($film, 201);
+    public function destroy($id)
+    {
+        $film = Film::findOrFail($id);
+        $film->delete();
+        return response()->json(['message' => 'Film berhasil dihapus']);
     }
 
     public function genres($id)
     {
         $film = Film::with('genres')->findOrFail($id);
-
         return response()->json($film->genres);
-    }
-
-    public function destroy($id)
-    {
-        $film = Film::find($id);
-
-        if (!$film) {
-            return response()->json([
-                'message' => 'Film tidak ditemukan'
-            ], 404);
-        }
-
-        $film->delete();
-
-        return response()->json([
-            'message' => 'Film berhasil dihapus'
-        ], 200);
     }
 }
